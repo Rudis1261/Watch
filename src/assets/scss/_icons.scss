@@ -1,0 +1,111 @@
+$icomoon-font-path: "assets/scss/fonts" !default;
+$icomoon-font-hash: 'w97yxr';
+$icomoon-font-version: 'v5';
+
+$icon-folder-light-open: "\e900";
+$icon-folder-light: "\e901";
+$icon-folder-open: "\e902";
+$icon-folder: "\e903";
+$icon-repeat: "\e904";
+$icon-login: "\e90c";
+$icon-logout: "\e905";
+$icon-spinner: "\e906";
+$icon-trash: "\e907";
+$icon-cancel-circle: "\e908";
+$icon-play: "\e909";
+$icon-search: "\e90a";
+$icon-backspace: "\e90b";
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('#{$icomoon-font-path}/icomoon_#{$icomoon-font-version}.eot?#{$icomoon-font-hash}');
+  src:  url('#{$icomoon-font-path}/icomoon_#{$icomoon-font-version}.eot?#{$icomoon-font-hash}#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/icomoon_#{$icomoon-font-version}.ttf?#{$icomoon-font-hash}') format('truetype'),
+    url('#{$icomoon-font-path}/icomoon_#{$icomoon-font-version}.woff?#{$icomoon-font-hash}') format('woff'),
+    url('#{$icomoon-font-path}/icomoon_#{$icomoon-font-version}.svg?#{$icomoon-font-hash}#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.icon-folder-light-open {
+  &:before {
+    content: $icon-folder-light-open;
+  }
+}
+.icon-folder-light {
+  &:before {
+    content: $icon-folder-light;
+  }
+}
+.icon-folder-open {
+  &:before {
+    content: $icon-folder-open;
+  }
+}
+.icon-folder {
+  &:before {
+    content: $icon-folder;
+  }
+}
+.icon-repeat {
+  &:before {
+    content: $icon-repeat;
+  }
+}
+.icon-login {
+  &:before {
+    content: $icon-login;
+  }
+}
+.icon-logout {
+  &:before {
+    content: $icon-logout;
+  }
+}
+.icon-spinner {
+  &:before {
+    content: $icon-spinner;
+  }
+}
+.icon-trash {
+  &:before {
+    content: $icon-trash;
+  }
+}
+.icon-cancel-circle {
+  &:before {
+    content: $icon-cancel-circle;
+  }
+}
+.icon-play {
+  &:before {
+    content: $icon-play;
+  }
+}
+.icon-search {
+  &:before {
+    content: $icon-search;
+  }
+}
+.icon-backspace {
+  &:before {
+    content: $icon-backspace;
+  }
+}

@@ -1,0 +1,79 @@
+<div class="container" *ngIf="!data && !configLoaded">
+  <loading></loading>
+</div>
+
+<div class="container home-page" *ngIf="data && configLoaded">
+
+  <div class="flex">
+    <div class="home-page-video">
+      <div>
+        <video
+          id="video-js"
+          style="width: 100%; height: 100%;"
+          class="video-js vjs-default-skin"
+          width="640"
+          height="400"
+          controls preload="none"
+          data-setup='{ "aspectRatio":"640:400", "playbackRates": [1, 1.5, 2] }'>
+          <source src="{{videoSrcUrl}}" type='video/mp4' />
+        </video>
+      </div>
+    </div>
+
+    <div class="home-page-file-manager">
+
+      <div class="clearfix">
+        <span class="btn" (click)="refresh()">
+          <i class="icon-repeat"></i>
+        </span>
+        <div class="file-browser-filter">
+          <input
+            placeholder="Find Something"
+            [ngModel]="searchTerm"
+            (ngModelChange)="searchTerm=$event"
+          >
+
+          <span class="btn">
+            <i class="icon-search"></i>
+          </span>
+        </div>
+
+        <div class="usage" *ngIf="usage">
+          <div
+            class="usage-bar text-center"
+            [ngStyle]="{'width': usage.percentile + '%'}"
+            [ngClass]="{'good': usage.percentile < 50, 'full': usage.percentile  > 50 && usage.percentile < 80,'danger': usage.percentile  > 80}"
+          >{{usage.percentile}} %</div>
+        </div>
+      </div>
+
+      <div class="flex" *ngFor='let folder of data | keys'>
+        <div class="file-browser-file-holder">
+          <div
+            class="file-browser-folder"
+            *ngIf='decode(folder.key) !== folderKey && (!searchTerm || folder.key.toLowerCase().indexOf(searchTerm) >= 0)'
+          >
+            <span (click)="setFolder(folder)">{{decode(folder.key) | limitTo:charLimit:true}}</span>
+            <i class="trash icon-trash pull-right" (click)="delete(decode(folder.key))"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex">
+        <div class="file-browser-file-holder">
+          <div *ngIf='data[encode(folderKey)] && data[encode(folderKey)].length > 0'>
+            <div
+              class="file-browser-file"
+              [ngClass]="{'active': (decode(file) == currentFile) }"
+              *ngFor="let file of data[encode(folderKey)]"
+            >
+              <i class="icon-play"></i>
+              <span (click)="loadVideo(file)">{{decode(file) | limitTo:charLimit:true}}</span>
+              <i class="trash icon-trash pull-right" (click)="delete(decode(file))"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

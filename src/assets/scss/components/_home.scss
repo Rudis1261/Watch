@@ -1,0 +1,115 @@
+.home-page {
+
+  .usage {
+    display: inline-block;
+    width: 100px;
+    background: #efefef;
+    min-height: 32px;
+    top: 11px;
+    overflow: hidden;
+    line-height: 32px;
+    position: relative;
+    @include border-radius(2px);
+
+    &-bar {
+      display: inline-block;
+      font-size: 10px;
+      background: #333;
+      color: #fff;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+
+      &.good {
+        background: $badass;
+      }
+
+      &.full {
+        background: $colorPrimary;
+      }
+
+      &.danger {
+        background: $youtubeRed;
+      }
+    }
+  }
+
+	&-file-manager {
+		.btn:first-of-type {
+			margin-top: 2px;
+		}
+	}
+
+	&-video > div {
+		cursor: pointer;
+		width: 100%;
+		margin: 10px;
+		float: left;
+		padding: 10px;
+		border: 1px solid #ccc;
+		background: #fafafa;
+		box-shadow: 3px 3px 21px #f5f5f5;
+		position: relative;
+		@include border-radius(3px);
+	}
+
+	&-file-manager {
+		@include flex(1 1 40%);
+	}
+
+	// Mobile
+	@include respond-to($screenTablet) {
+
+		.flex:first-of-type {
+			@include flex-wrap(wrap);
+		}
+
+		&-file-manager {
+			margin: 0 0 10px;
+			@include flex(1 1 100%);
+		}
+
+		&-video {
+			margin: 0 0 10px;
+			@include flex(1 1 100%);
+			> div {
+				padding: 2px;
+				margin-left: -2px;
+				video {
+					min-width: auto;
+					min-height: auto;
+				}
+			}
+		}
+	}
+
+	// Tablet
+	@include respond-from($screenTablet) {
+
+		&-video,
+		&-file-manager {
+			margin: 0 0 10px;
+			@include flex(0 0 50%);
+		}
+		&-file-manager {
+			margin-left: 20px;
+		}
+	}
+
+	// Desktop
+	@include respond-from($screenDesktop) {
+		&-video,
+		&-file-manager {
+			margin: 20px 0 10px;
+		}
+
+		&-video {
+			@include flex(0 1 60%);
+		}
+		&-file-manager {
+			margin-left: 50px;
+			@include flex(0 1 40%);
+		}
+	}
+}

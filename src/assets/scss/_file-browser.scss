@@ -1,0 +1,175 @@
+.file-browser {
+  $file-browser_folderColor: #efddbc;
+  $file-browser_fileColor: #efefef;
+  $file-browser_actionsColor: #555;
+
+  &-default {
+    min-height: 40px;
+    margin: 3px 0;
+    line-height: 19px;
+    border: 2px solid #ccc;
+    border-left: none;
+    border-top: none;
+    border-right-width: 1px;
+    padding: 10px 0 0 10px;
+
+    @include border-radius(2px);
+    @include flex(1 1 100%);
+
+    i {
+      width: 25px;
+      position: relative;
+      top: 2px;
+      text-align: center;
+      display: inline-block;
+    }
+  }
+
+  &-folder {
+    @extend .file-browser-default;
+    color: darken($file-browser_folderColor, 60%);
+    border-color: darken($file-browser_folderColor, 20%);
+    background: $file-browser_folderColor;
+    box-shadow: 1px 1px 2px darken($file-browser_folderColor, 20%);
+
+    i.trash {
+      padding: 0px 20px 0 0;
+      display: inline-block;
+      text-align: left;
+    }
+
+    span {
+      display: inline-block;
+      padding: 10px 5px;
+      margin-top: -10px;
+    }
+
+    &:hover {
+      color: darken($file-browser_folderColor, 65%);
+      background: darken($file-browser_folderColor, 5%);
+      border-color: darken($file-browser_folderColor, 30%);
+      cursor: pointer;
+      i.folder:before {
+        @extend .icon-folder-light-open:before;
+      }
+
+      i.trash {
+        color: red;
+        font-size: 15px;
+      }
+    }
+  }
+
+  &-actions {
+    @extend .file-browser-default;
+    color: #fff;
+    border-color: darken($file-browser_actionsColor, 30%);
+    background: $file-browser_actionsColor;
+    box-shadow: 1px 1px 2px darken($file-browser_actionsColor, 20%);
+
+    &:hover {
+      color: darken(#fff, 10%);
+      background: darken($file-browser_actionsColor, 2%);
+      border-color: darken($file-browser_actionsColor, 40%);
+    }
+
+    span {
+      color: #fff;
+      cursor: pointer;
+      background: darken($file-browser_actionsColor, 30%);
+      display: inline-block;
+      padding: 1px 9px 4px 0;
+      margin: -3px 2px;
+      @include border-radius(4px);
+
+      i {
+        color: #fff;
+      }
+    }
+  }
+
+  &-file {
+    position: relative;
+
+    &-holder {
+      @include flex(1 1 100%);
+    }
+
+    @extend .file-browser-default;
+    margin-left: 10px;
+    color: darken($file-browser_fileColor, 50%);
+    border-color: darken($file-browser_fileColor, 10%);
+    background: ligthen($file-browser_fileColor, 5%);
+    box-shadow: 1px 1px 2px darken($file-browser_fileColor, 10%);
+
+    &.active {
+      background: darken($file-browser_fileColor, 5%) !important;
+      i {
+        color: darken($blue, 20%)!important;
+      }
+    }
+
+    span {
+      position: absolute;
+      left: 40px;
+      right: 40px;
+      top: 0;
+      bottom: 0;
+      line-height: 38px;
+    }
+
+    &:hover {
+      color: darken($file-browser_fileColor, 60%);
+      background: $file-browser_fileColor;
+      border-color: darken($file-browser_fileColor, 20%);
+      cursor: pointer;
+      i {
+        color: $youtubeRed;
+        @include transform(scale(1.1));
+        @include transform-origin(center center);
+        @include transition(all 200ms);
+      }
+    }
+  }
+
+  &-filter {
+    display: inline-block;
+    text-align: right;
+    position: relative;
+    left: auto;
+
+    input {
+      display: inline-block;
+      padding: 6px;
+      margin: 2px 0 0;
+    }
+    .btn {
+      display: inline-block;
+    }
+  }
+
+  @include respond-to($screenTablet) {
+    &-actions {
+      @include flex-display(space-between);
+      @include justify-content(space-between);
+
+      span {
+        padding: 1px 9px 0 0;
+        max-height: 25px;
+        margin: -3px 5px;
+        &:last-of-type {
+          margin-right: 7px;
+        }
+        &:first-of-type {
+          margin-left: 0;
+        }
+      }
+    }
+
+    &-filter {
+      text-align: left;
+      position: relative;
+      padding: 8px 0;
+    }
+  }
+}
