@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   loaded: boolean = false;
   configLoaded: boolean = false;
   data: any;
+  deleted: any;
   originalData: any;
   offset = [];
   level = 0;
@@ -55,6 +56,11 @@ export class HomeComponent implements OnInit {
         this.af.database.object('/usage').subscribe((data) => {
           this.usage = data;
         });
+
+        this.deleteRef.subscribe((data) => {
+          this.deleted = data;
+          //console.log(this.deleted);
+        });
       }
     });
   };
@@ -89,6 +95,15 @@ export class HomeComponent implements OnInit {
     if (!this.deleteRef) return false;
     //console.log(String(this.pathKey) + "/" + String(video));
     this.deleteRef.push(String(this.pathKey) + "/" + String(video));
+  }
+
+  isDeleted(filename) {
+    if (!filename || !this.deleted || this.deleted.length == 0) {
+      return false;
+    }
+
+    filename = String(this.pathKey) + "/" + String(filename);
+    return this.deleted.filter(file => file.$value === filename).length > 0;
   }
 
   refresh(): void {

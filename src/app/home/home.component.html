@@ -47,29 +47,36 @@
         </div>
       </div>
 
-      <div class="flex" *ngFor='let folder of data | keys'>
-        <div class="file-browser-file-holder">
-          <div
-            class="file-browser-folder"
-            *ngIf='decode(folder.key) !== folderKey && (!searchTerm || folder.key.toLowerCase().indexOf(searchTerm) >= 0)'
-          >
-            <span (click)="setFolder(folder)">{{decode(folder.key) | limitTo:charLimit:true}}</span>
-            <i class="trash icon-trash pull-right" (click)="delete(decode(folder.key))"></i>
-          </div>
-        </div>
+      <div *ngIf='data.$value === null'>
+        <br><h4>No files found</h4>
       </div>
 
-      <div class="flex">
-        <div class="file-browser-file-holder">
-          <div *ngIf='data[encode(folderKey)] && data[encode(folderKey)].length > 0'>
+      <div *ngIf='!data.$value && data.$value !== null'>
+        <div class="flex" *ngFor='let folder of data | keys'>
+          <div class="file-browser-file-holder">
             <div
-              class="file-browser-file"
-              [ngClass]="{'active': (decode(file) == currentFile) }"
-              *ngFor="let file of data[encode(folderKey)]"
+              class="file-browser-folder"
+              [ngClass]="{'deleted': isDeleted(decode(folder.key)) }"
+              *ngIf='decode(folder.key) !== folderKey && (!searchTerm || folder.key.toLowerCase().indexOf(searchTerm) >= 0)'
             >
-              <i class="icon-play"></i>
-              <span (click)="loadVideo(file)">{{decode(file) | limitTo:charLimit:true}}</span>
-              <i class="trash icon-trash pull-right" (click)="delete(decode(file))"></i>
+              <span (click)="setFolder(folder)">{{decode(folder.key) | limitTo:charLimit:true}}</span>
+              <i class="trash icon-trash pull-right" (click)="delete(decode(folder.key))" *ngIf="!isDeleted(decode(folder.key))"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex">
+          <div class="file-browser-file-holder">
+            <div *ngIf='data[encode(folderKey)] && data[encode(folderKey)].length > 0'>
+              <div
+                class="file-browser-file"
+                [ngClass]="{'active': (decode(file) == currentFile), 'deleted': isDeleted(decode(file)) }"
+                *ngFor="let file of data[encode(folderKey)]"
+              >
+                <i class="icon-play"></i>
+                <span (click)="loadVideo(file)">{{decode(file) | limitTo:charLimit:true}}</span>
+                <i class="trash icon-trash pull-right" (click)="delete(decode(file))" *ngIf="!isDeleted(decode(file))"></i>
+              </div>
             </div>
           </div>
         </div>

@@ -88,6 +88,23 @@
     }
   }
 
+  &-folder,
+  &-file {
+    &.deleted:hover,
+    &.deleted {
+      background: #e2c5c5;
+      color: #800000;
+      border-color: darken(#800000, 10%);
+      i {
+        color: darken(#800000, 10%);
+      }
+    }
+
+    &.deleted:hover {
+      cursor: default;
+    }
+  }
+
   &-file {
     position: relative;
 
@@ -99,7 +116,7 @@
     margin-left: 10px;
     color: darken($file-browser_fileColor, 50%);
     border-color: darken($file-browser_fileColor, 10%);
-    background: ligthen($file-browser_fileColor, 5%);
+    background: lighten($file-browser_fileColor, 5%);
     box-shadow: 1px 1px 2px darken($file-browser_fileColor, 10%);
 
     &.active {
